@@ -1,0 +1,2 @@
+# Muhammad-Rizky-Kurniawan_1202210070_Latihan-WAD
+Latihan WAD_Muhammad Rizky Kurniawan_1202210070_SI4505

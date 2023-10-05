@@ -1,0 +1,31 @@
+body {
+    background-color: antiquewhite;
+    background-position: top;
+
+}
+
+h1{
+    text-align:center;
+    text-decoration: none;
+    color:black;
+    text-indent: 30px;
+}
+
+h2{
+    text-align: center;
+    color:darksalmon;
+    text-transform: initial;
+}
+
+h3{
+    text-align: center;
+    color:black;
+    text-decoration:underline ;
+}
+p{
+    text-align: justify;
+    color:black;
+    letter-spacing: normal;
+
+
+}

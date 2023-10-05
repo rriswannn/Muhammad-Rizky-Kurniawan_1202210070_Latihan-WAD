@@ -1,0 +1,31 @@
+body {
+    background-image: url(https://www.akseleran.co.id/blog/wp-content/uploads/2021/10/Akseleran-Blog-Foto-6.jpg);
+    background-position: top;
+
+}
+
+h1{
+    text-align:left;
+    text-decoration: none;
+    color:beige;
+    text-indent: 30px;
+}
+
+h2{
+    text-align: center;
+    color:darksalmon;
+    text-transform: initial;
+}
+
+h3{
+    text-align: center;
+    color: brown;
+    text-decoration: line-through;
+}
+p{
+    text-align: justify;
+    color:black;
+    letter-spacing: normal;
+
+
+}

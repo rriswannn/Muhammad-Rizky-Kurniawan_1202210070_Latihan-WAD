@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>MUHAMMAD RIZKY KURNIAWAN</title>
+</head>
+<body>
+  <h1>JavaScript Bisa Mengubah Gambar </h1>
+  <img id="Tugas 2 - Pengenalan Server Side & Dasar PHP" onclick="changeImage()" src="m1 roster.jpg" width="600" height="400">
+  <p>Click the image to change image.</p>
+  <script>
+    function changeImage() {
+      var image = document.getElementById('Tugas 2 - Pengenalan Server Side & Dasar PHP');
+      if (image.src.match("m1 piala")) {
+        image.src = "m1 roster.jpg";
+      } else {
+        image.src = "m1 piala.jpg";
+      }
+    }
+  </script>
+</body>
+</html>

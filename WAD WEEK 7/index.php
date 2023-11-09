@@ -1,9 +1,7 @@
 <?php
 include 'koneksi.php';
 
-
 $pesan = "";
-
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if (isset($_POST["action"]) && $_POST["action"] == "update") {
@@ -12,7 +10,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $email_update = $_POST["email_update"];
         $nomor_telepon_update = $_POST["nomor_telepon_update"];
 
-       
         $query_update = "UPDATE contacts SET nama='$nama_update', email='$email_update', nomor_telepon='$nomor_telepon_update' WHERE id=$id_update";
         $result_update = mysqli_query($koneksi, $query_update);
 
@@ -24,7 +21,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     } elseif (isset($_POST["action"]) && $_POST["action"] == "delete") {
         $id_delete = $_POST["id_delete"];
 
-        
         $query_delete = "DELETE FROM contacts WHERE id = $id_delete";
         $result_delete = mysqli_query($koneksi, $query_delete);
 
@@ -38,18 +34,21 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $email = $_POST["email"];
         $nomor_telepon = $_POST["nomor_telepon"];
 
-        
-        $query = "INSERT INTO contacts (nama, email, nomor_telepon) VALUES ('$nama', '$email', '$nomor_telepon')";
-        $result = mysqli_query($koneksi, $query);
-
-        if ($result) {
-            $pesan = "Kontak berhasil ditambahkan!";
+        // Validasi nomor telepon
+        if (!is_numeric($nomor_telepon)) {
+            $pesan = "Nomor telepon harus berupa angka!";
         } else {
-            $pesan = "Error: " . mysqli_error($koneksi);
+            $query = "INSERT INTO contacts (nama, email, nomor_telepon) VALUES ('$nama', '$email', '$nomor_telepon')";
+            $result = mysqli_query($koneksi, $query);
+
+            if ($result) {
+                $pesan = "Kontak berhasil ditambahkan!";
+            } else {
+                $pesan = "Error: " . mysqli_error($koneksi);
+            }
         }
     }
 }
-
 
 $query_select = "SELECT * FROM contacts";
 $result_select = mysqli_query($koneksi, $query_select);
@@ -66,33 +65,27 @@ $result_select = mysqli_query($koneksi, $query_select);
         }
 
         <?php if (!empty($pesan)) : ?>
-            
             window.onload = function() {
                 tampilkanNotifikasi('<?php echo $pesan; ?>');
             };
         <?php endif; ?>
 
-        
         function showUpdateForm(id, nama, email, nomorTelepon) {
-            
             document.getElementById("id_update").value = id;
             document.getElementById("nama_update").value = nama;
             document.getElementById("email_update").value = email;
             document.getElementById("nomor_telepon_update").value = nomorTelepon;
 
-            
             document.getElementById("updateForm").style.display = "block";
         }
 
-        
         function confirmDelete(id) {
             var konfirmasi = confirm("Apakah Anda yakin ingin menghapus kontak ini?");
             if (konfirmasi) {
-                
                 var formDelete = document.createElement("form");
                 formDelete.method = "post";
                 formDelete.action = "";
-                formDelete.style.display = "none"; 
+                formDelete.style.display = "none";
 
                 var inputId = document.createElement("input");
                 inputId.type = "hidden";
@@ -114,7 +107,7 @@ $result_select = mysqli_query($koneksi, $query_select);
     </script>
 </head>
 <body>
-    <h1>Formulir Input Kontak</h1>
+    <h1 class="center">Formulir Input Kontak</h1>
     <form method="post" action="">
         <label for="nama">Nama:</label>
         <input type="text" id="nama" name="nama" required><br>
@@ -128,7 +121,7 @@ $result_select = mysqli_query($koneksi, $query_select);
         <button type="submit">Tambah Kontak</button>
     </form>
 
-    <h2>Data Kontak</h2>
+    <h2 class="center">Data Kontak</h2>
     <table border="1" cellpadding="10" cellspacing="0">
         <tr>
             <th>No.</th>
@@ -138,7 +131,6 @@ $result_select = mysqli_query($koneksi, $query_select);
             <th>Aksi</th>
         </tr>
         <?php
-        
         $no = 1;
         while ($row = mysqli_fetch_assoc($result_select)) {
             echo "<tr>";
@@ -156,9 +148,8 @@ $result_select = mysqli_query($koneksi, $query_select);
         ?>
     </table>
 
-
     <div id="updateForm" style="display: none;">
-        <h2>Formulir Update Kontak</h2>
+        <h2 class="center">Formulir Update Kontak</h2>
         <form method="post" action="">
             <input type="hidden" id="id_update" name="id_update">
             <label for="nama_update">Nama:</label>
